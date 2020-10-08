@@ -37,14 +37,19 @@ void draw() {
       break;
   }  
   
-  
 }
 
 void requestToken(){
+  
   if(tokenResponse == null && (timeForNextDisplay == 0)){
     tokenResponse = loadJSONObject(tokenUrl);
-    timeForNextDisplay = tokenResponse.getInt("next");
-    status = 1;
+    println("Search token", tokenResponse.getString("token").length());
+    if(tokenResponse != null && tokenResponse.getString("token") != ""){
+      timeForNextDisplay = tokenResponse.getInt("next");
+      status = 1;
+    }else{
+      println("Error requesting Token:", tokenResponse);
+    }
   }
 }
 
@@ -56,6 +61,7 @@ void requestQRCode(){
   if(webImg == null && validToken()){
     String token = tokenResponse.getString("token");
     webImg = loadImage(qrCodeUrl + token, "png");
+    println("Search QR");
     surface.setVisible(true);
     timeToDisplay = 600;
   }

@@ -8,11 +8,13 @@ $url = 'https://tecnomultimedia1.herokuapp.com/api';
 
 $course = $DB->get_record('course', array("id" => $_GET["id"]), '*', MUST_EXIST);
 
+$response = array("token" => "-1", "error" => false, "message" => "OK");
 //echo json_encode($USER);
 //exit;
 
 if(isset($USER) && $USER->id == 0){
-    echo "AUTH ERROR";
+    $response["message"] = "AUTH ERROR";
+    $response["error"] = true;
 }else{
     try{
         $response = array();
@@ -30,7 +32,8 @@ if(isset($USER) && $USER->id == 0){
 
         echo $response;
     } catch (\Exception $e){
-        echo json_encode($e);
+        $response["message"] = $e->getMessage();
+        $response["error"] = true;
     }
 }
 

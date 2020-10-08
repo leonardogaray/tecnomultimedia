@@ -26,7 +26,7 @@ $context = context_course::instance($course->id, MUST_EXIST);
 require_login($course);
 
 $PAGE->set_pagelayout('course');
-$PAGE->set_title('QR Code');
-$PAGE->set_heading('QR Code');
+$PAGE->set_title('Sistema de Asistencia Online');
+$PAGE->set_heading('Sistema de Asistencia Online');
 $PAGE->set_url($CFG->wwwroot.'/_tps/assistance/index.php');
 echo $OUTPUT->header();
